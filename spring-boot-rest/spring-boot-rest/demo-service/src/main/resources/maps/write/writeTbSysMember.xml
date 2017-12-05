@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="write.TbSysMember">  
+
+	<insert id="insertEntity" parameterType="com.xqt.entity.sys.SysMember">
+		<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey>
+		<![CDATA[insert into tb_sys_member (]]>
+		<trim suffixOverrides=",">  
+			<if test="id != null and id != ''">id,</if> 
+			<if test="mem_name != null and mem_name != ''">mem_name,</if> 
+			<if test="mem_pwd != null and mem_pwd != ''">mem_pwd,</if> 
+			<if test="mem_qq != null and mem_qq != ''">mem_qq,</if> 
+			<if test="mem_mobile != null and mem_mobile != ''">mem_mobile,</if> 
+			<if test="mem_headimg_url != null and mem_headimg_url != ''">mem_headimg_url,</if> 
+			<if test="mem_email != null and mem_email != ''">mem_email,</if> 
+			<if test="mem_true_name != null and mem_true_name != ''">mem_trueName,</if> 
+			<if test="mem_type != null and mem_type != ''">mem_type,</if> 
+			<if test="mem_status != null and mem_status != ''">mem_status,</if> 
+			<if test="mem_main_style != null and mem_main_style != ''">mem_main_style,</if> 
+			<if test="mem_parent_id != null and mem_parent_id != ''">mem_parent_id,</if> 
+			<if test="create_date != null and create_date != ''">create_date,</if> 
+			<if test="create_by != null and create_by != ''">create_by,</if> 
+			<if test="update_date != null and update_date != ''">update_date,</if> 
+			<if test="update_by != null and update_by != ''">update_by,</if> 
+			<if test="remarks != null and remarks != ''">remarks,</if> 
+			<if test="del_flag != null and del_flag != ''">del_flag,</if> 
+		</trim>
+		<![CDATA[) values (]]>
+		<trim suffixOverrides=",">  
+			<if test="id != null and id != ''">#{id},</if> 
+			<if test="mem_name != null and mem_name != ''">#{mem_name},</if> 
+			<if test="mem_pwd != null and mem_pwd != ''">#{mem_pwd},</if> 
+			<if test="mem_qq != null and mem_qq != ''">#{mem_qq},</if> 
+			<if test="mem_mobile != null and mem_mobile != ''">#{mem_mobile},</if> 
+			<if test="mem_headimg_url != null and mem_headimg_url != ''">#{mem_headimg_url},</if> 
+			<if test="mem_email != null and mem_email != ''">#{mem_email},</if> 
+			<if test="mem_true_name != null and mem_true_name != ''">#{mem_true_name},</if> 
+			<if test="mem_type != null and mem_type != ''">#{mem_type},</if> 
+			<if test="mem_status != null and mem_status != ''">#{mem_status},</if> 
+			<if test="mem_main_style != null and mem_main_style != ''">#{mem_main_style},</if> 
+			<if test="mem_parent_id != null and mem_parent_id != ''">#{mem_parent_id},</if> 
+			<if test="create_date != null and create_date != ''">#{create_date},</if> 
+			<if test="create_by != null and create_by != ''">#{create_by},</if> 
+			<if test="update_date != null and update_date != ''">#{update_date},</if> 
+			<if test="update_by != null and update_by != ''">#{update_by},</if> 
+			<if test="remarks != null and remarks != ''">#{remarks},</if> 
+			<if test="del_flag != null and del_flag != ''">#{del_flag},</if> 
+		</trim>
+		<![CDATA[)]]>
+	</insert>
+	
+
+	<update id="updateEntity" parameterType="com.xqt.entity.sys.SysMember">
+		update tb_sys_member
+		<set>
+			<if test="mem_name != null and mem_name != ''">mem_name=#{mem_name},</if>
+			<if test="mem_pwd != null and mem_pwd != ''">mem_pwd=#{mem_pwd},</if>
+			<if test="mem_qq != null and mem_qq != ''">mem_qq=#{mem_qq},</if>
+			<if test="mem_mobile != null and mem_mobile != ''">mem_mobile=#{mem_mobile},</if>
+			<if test="mem_headimg_url != null and mem_headimg_url != ''">mem_headimg_url=#{mem_headimg_url},</if>
+			<if test="mem_email != null and mem_email != ''">mem_email=#{mem_email},</if>
+			<if test="mem_true_name != null and mem_true_name != ''">mem_trueName=#{mem_true_name},</if>
+			<if test="mem_type != null and mem_type != ''">mem_type=#{mem_type},</if>
+			<if test="mem_status != null and mem_status != ''">mem_status=#{mem_status},</if>
+			<if test="mem_main_style != null and mem_main_style != ''">mem_main_style=#{mem_main_style},</if>
+			<if test="mem_parent_id != null and mem_parent_id != ''">mem_parent_id=#{mem_parent_id},</if>
+			<if test="create_date != null and create_date != ''">create_date=#{create_date},</if>
+			<if test="create_by != null and create_by != ''">create_by=#{create_by},</if>
+			<if test="update_date != null and update_date != ''">update_date=#{update_date},</if>
+			<if test="update_by != null and update_by != ''">update_by=#{update_by},</if>
+			<if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+			<if test="del_flag != null and del_flag != ''">del_flag=#{del_flag},</if>
+		</set>
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</update>
+	
+	<delete id="deleteEntity" parameterType="com.xqt.entity.sys.SysMember">
+		delete from tb_sys_member 
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</delete>
+	
+</mapper>

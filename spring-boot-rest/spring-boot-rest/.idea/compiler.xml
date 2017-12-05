@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin-interface" />
+        <module name="config-server" />
+        <module name="core" />
+        <module name="demo-service" />
+        <module name="inter" />
+        <module name="liveshow-service" />
+        <module name="spring-boot-starter-dubbo" />
+        <module name="xqt-admin-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="admin-interface" target="1.8" />
+      <module name="admin-service" target="1.8" />
+      <module name="config-server" target="1.8" />
+      <module name="core" target="1.8" />
+      <module name="demo-service" target="1.8" />
+      <module name="inter" target="1.8" />
+      <module name="rest-interface" target="1.8" />
+      <module name="spring-boot-rest" target="1.8" />
+      <module name="spring-boot-starter-dubbo" target="1.8" />
+      <module name="xqt-admin-service" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

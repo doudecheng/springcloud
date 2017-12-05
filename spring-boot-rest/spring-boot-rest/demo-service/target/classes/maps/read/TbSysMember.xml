@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="read.TbSysMember">
+	<resultMap id="BaseResultMap" type="com.xqt.entity.sys.SysMember">
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="mem_name" property="mem_name" jdbcType="VARCHAR" />
+		<result column="mem_pwd" property="mem_pwd" jdbcType="VARCHAR" />
+		<result column="mem_qq" property="mem_qq" jdbcType="VARCHAR" />
+		<result column="mem_mobile" property="mem_mobile" jdbcType="VARCHAR" />
+		<result column="mem_headimg_url" property="mem_headimg_url" jdbcType="VARCHAR" />
+		<result column="mem_email" property="mem_email" jdbcType="VARCHAR" />
+		<result column="mem_trueName" property="mem_true_name" jdbcType="VARCHAR" />
+		<result column="mem_type" property="mem_type" jdbcType="VARCHAR" />
+		<result column="mem_status" property="mem_status" jdbcType="DECIMAL" />
+		<result column="mem_main_style" property="mem_main_style" jdbcType="VARCHAR" />
+		<result column="mem_parent_id" property="mem_parent_id" jdbcType="VARCHAR" />
+		<result column="create_date" property="create_date" jdbcType="TIMESTAMP" />
+		<result column="create_by" property="create_by" jdbcType="VARCHAR" />
+		<result column="update_date" property="update_date" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="update_by" jdbcType="VARCHAR" />
+		<result column="remarks" property="remarks" jdbcType="VARCHAR" />
+		<result column="del_flag" property="del_flag" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+		a.id AS id,
+		a.mem_name AS mem_name,
+		a.mem_pwd AS mem_pwd,
+		a.mem_qq AS mem_qq,
+		a.mem_mobile AS mem_mobile,
+		a.mem_headimg_url AS mem_headimg_url,
+		a.mem_email AS mem_email,
+		a.mem_trueName AS mem_true_name,
+		a.mem_type AS mem_type,
+		a.mem_status AS mem_status,
+		a.mem_main_style AS mem_main_style,
+		a.mem_parent_id AS mem_parent_id,
+		a.create_date AS create_date,
+		a.create_by AS create_by,
+		a.update_date AS update_date,
+		a.update_by AS update_by,
+		a.remarks AS remarks,
+		a.del_flag AS del_flag
+  </sql>
+
+	<sql id="Base_Vo_List" >
+		a.id AS id,
+		a.mem_name AS mem_name,
+		a.mem_qq AS mem_qq,
+		a.mem_mobile AS mem_mobile,
+		a.mem_email AS mem_email,
+		a.mem_trueName AS mem_true_name,
+		a.create_date AS create_date
+	</sql>
+
+	<sql id="tbSysMember">
+		<where>
+			<if test="id != null and id != ''">
+				and a.id = #{id}
+			</if>
+			<if test="mem_name != null and mem_name != ''">
+				and a.mem_name = #{mem_name}
+			</if>
+			<if test="mem_pwd != null and mem_pwd != ''">
+				and a.mem_pwd = #{mem_pwd}
+			</if>
+			<if test="mem_qq != null and mem_qq != ''">
+				and a.mem_qq = #{mem_qq}
+			</if>
+			<if test="mem_mobile != null and mem_mobile != ''">
+				and a.mem_mobile = #{mem_mobile}
+			</if>
+			<if test="mem_headimg_url != null and mem_headimg_url != ''">
+				and a.mem_headimg_url = #{mem_headimg_url}
+			</if>
+			<if test="mem_email != null and mem_email != ''">
+				and a.mem_email = #{mem_email}
+			</if>
+			<if test="mem_true_name != null and mem_true_name != ''">
+				and a.mem_trueName = #{mem_true_name}
+			</if>
+			<if test="mem_type != null and mem_type != ''">
+				and a.mem_type = #{mem_type}
+			</if>
+			<if test="mem_status != null and mem_status != ''">
+				and a.mem_status = #{mem_status}
+			</if>
+			<if test="mem_main_style != null and mem_main_style != ''">
+				and a.mem_main_style = #{mem_main_style}
+			</if>
+			<if test="mem_parent_id != null and mem_parent_id != ''">
+				and a.mem_parent_id = #{mem_parent_id}
+			</if>
+			<if test="create_date != null and create_date != ''">
+				and a.create_date = #{create_date}
+			</if>
+			<if test="create_by != null and create_by != ''">
+				and a.create_by = #{create_by}
+			</if>
+			<if test="update_date != null and update_date != ''">
+				and a.update_date = #{update_date}
+			</if>
+			<if test="update_by != null and update_by != ''">
+				and a.update_by = #{update_by}
+			</if>
+			<if test="remarks != null and remarks != ''">
+				and a.remarks = #{remarks}
+			</if>
+			<if test="del_flag != null and del_flag != ''">
+				and a.del_flag = #{del_flag}
+			</if>
+			<if test="map.keyword != null">
+				and a.keyword like concat('%',#{map.keyword},'%')
+			</if>
+			<if test="map.ids != null">
+				and a.id in
+				<foreach collection="map.ids" open="(" separator="," close=")"
+					index="index" item="item">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectEntityCount" resultType="int" parameterType="com.xqt.param.sys.SysMemberParam">
+		select count(1) from tb_sys_member a
+		<include refid="tbSysMember" />
+	</select>
+
+	<!-- 查询列表 -->
+	<select id="selectEntityList" resultMap="BaseResultMap" parameterType="com.xqt.param.sys.SysMemberParam">
+		select
+		<include refid="Base_Column_List" />
+		from tb_sys_member a
+		<include refid="tbSysMember" />
+		<include refid="common.Order" />
+	</select>
+
+	<select id="selectEntityById" resultMap="BaseResultMap" parameterType="Object" >
+    	select  <include refid="Base_Column_List" />  from tb_sys_member a  where a.id =  #{id}
+  	</select>
+
+  	<select id="selectEntity" resultMap="BaseResultMap" parameterType="com.xqt.param.sys.SysMemberParam" >
+    	select  <include refid="Base_Column_List" />  from tb_sys_member a  <include refid="tbSysMember" />
+  	</select>
+
+	<select id="selectPageList" resultMap="BaseResultMap" parameterType="com.xqt.param.sys.SysMemberParam">
+		select
+		<include refid="Base_Column_List" />
+		from tb_sys_member a
+		<include refid="tbSysMember" />
+		<include refid="common.Order" />
+		limit #{pageOffset},#{pageSize}
+	</select>
+
+	<select id="selectPageVoList" resultType="com.xqt.vo.SysmemberVo" parameterType="com.xqt.param.sys.SysMemberParam">
+		select
+		<include refid="Base_Vo_List" />
+		from tb_sys_member a
+		<include refid="tbSysMember" />
+		<include refid="common.Order" />
+		limit #{pageOffset},#{pageSize}
+	</select>
+
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="read.MemberDemo">  
+	<resultMap id="BaseResultMap" type="com.xqt.entity.demo.MemberDemo">
+		<result column="id" property="id" jdbcType="DECIMAL" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="DECIMAL" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		a.id AS id,
+		a.username AS username,
+		a.password AS password,
+		a.age AS age,
+		a.sex AS sex
+  </sql>
+
+	<sql id="memberDemo">  
+		<where>
+			<if test="id != null and id != ''">
+				and a.id = #{id}
+			</if>
+			<if test="username != null and username != ''">
+				and a.username = #{username}
+			</if>
+			<if test="password != null and password != ''">
+				and a.password = #{password}
+			</if>
+			<if test="age != null and age != ''">
+				and a.age = #{age}
+			</if>
+			<if test="sex != null and sex != ''">
+				and a.sex = #{sex}
+			</if>
+			<if test="map.keyword != null">
+				and a.keyword like concat('%',#{map.keyword},'%')
+			</if>
+			<if test="map.ids != null">
+				and a.id in
+				<foreach collection="map.ids" open="(" separator="," close=")"
+					index="index" item="item">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+	
+	<select id="selectEntityCount" resultType="int" parameterType="com.xqt.param.demo.MemberDemoParam">
+		select count(*) from member_demo a
+		<include refid="memberDemo" />
+	</select>
+	
+	<!-- 查询列表 -->
+	<select id="selectEntityList" resultType="com.xqt.entity.demo.MemberDemo" parameterType="com.xqt.param.demo.MemberDemoParam">
+		select
+		<include refid="Base_Column_List" />
+		from member_demo a
+		<include refid="memberDemo" />
+		<include refid="common.Order" />
+	</select>
+	
+	<select id="selectEntityById" resultMap="BaseResultMap" parameterType="Object" >
+    	select  <include refid="Base_Column_List" />  from member_demo a  where a.id =  #{id}
+  	</select>
+  	
+  	<select id="selectEntity" resultMap="BaseResultMap" parameterType="com.xqt.param.demo.MemberDemoParam" >
+    	select  <include refid="Base_Column_List" />  from member_demo a  <include refid="memberDemo" />
+  	</select>
+
+	
+	<select id="selectPageList" resultType="com.xqt.entity.demo.MemberDemo" parameterType="com.xqt.param.demo.MemberDemoParam">
+		select 
+		<include refid="Base_Column_List" />
+		from member_demo a
+		<include refid="memberDemo" />
+		<include refid="common.Order" />
+		limit #{pageOffset},#{pageSize}
+	</select>
+</mapper>

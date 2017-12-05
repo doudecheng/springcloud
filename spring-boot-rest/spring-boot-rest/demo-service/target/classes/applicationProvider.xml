@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd" default-lazy-init="true"> 
+            
+	<dubbo:application name="demo-service" owner="root"/>
+	
+    <dubbo:registry  protocol="zookeeper" address="${registry.address}"/>
+    
+    <!-- delay延迟注册服务时间(毫秒)- ，设为-1时，表示延迟到Spring容器初始化完成时暴露服务 -->
+     <!-- retries远程服务调用重试次数，不包括第一次调用，不需要重试请设为0 -->
+     <!-- timeout 远程服务调用超时时间(毫秒) -->
+    <dubbo:provider delay="-1" timeout="1200000"  retries="0" loadbalance="roundrobin"/>
+   	<dubbo:protocol name="dubbo" port="${dubbo.port}" threadpool="cached" threads="3000" />
+
+	<!-- 如果用注解来注册bean,会无法使用事务，所以使用以上方式用xml管理bean -->
+	<!--<dubbo:annotation package="com.haochedai.messageserver.service" />-->
+
+    <dubbo:service interface="com.xqt.inters.service.demo.IMemberDemoService" ref="memberDemoService" />
+    <bean id="memberDemoService" class="com.xqt.service.demo.MemberDemoService" />
+    <dubbo:service interface="com.xqt.inters.service.demo.IInformationDemoService" ref="informationDemoService" />
+    <bean id="informationDemoService" class="com.xqt.service.demo.InformationDemoService" />
+    <dubbo:service interface="com.xqt.inters.service.demo.ITbSysMemberService" ref="sysMemberService" />
+    <bean id="sysMemberService" class="com.xqt.service.demo.TbSysMemberService" />
+
+</beans>

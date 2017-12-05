@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="write.MemberDemo">  
+
+	<insert id="insertEntity" parameterType="com.xqt.entity.demo.MemberDemo">
+		<![CDATA[insert into member_demo (]]>
+		<trim suffixOverrides=",">  
+			<if test="id != null and id != ''">id,</if> 
+			<if test="username != null and username != ''">username,</if> 
+			<if test="password != null and password != ''">password,</if> 
+			<if test="age != null and age != ''">age,</if> 
+			<if test="sex != null and sex != ''">sex,</if> 
+		</trim>
+		<![CDATA[) values (]]>
+		<trim suffixOverrides=",">  
+			<if test="id != null and id != ''">#{id},</if> 
+			<if test="username != null and username != ''">#{username},</if> 
+			<if test="password != null and password != ''">#{password},</if> 
+			<if test="age != null and age != ''">#{age},</if> 
+			<if test="sex != null and sex != ''">#{sex},</if> 
+		</trim>
+		<![CDATA[)]]>
+	</insert>
+	
+
+	<update id="updateEntity" parameterType="com.xqt.entity.demo.MemberDemo">
+		update member_demo
+		<set>
+			<if test="username != null and username != ''">username=#{username},</if>
+			<if test="password != null and password != ''">password=#{password},</if>
+			<if test="age != null and age != ''">age=#{age},</if>
+			<if test="sex != null and sex != ''">sex=#{sex},</if>
+		</set>
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="map.ids != null">
+				and id in
+				<foreach collection="map.ids" open="(" separator="," close=")"
+					index="index" item="item">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</update>
+	
+	<delete id="deleteEntity" parameterType="com.xqt.entity.demo.MemberDemo">
+		delete from member_demo 
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="map.ids != null">
+				and id in
+				<foreach collection="map.ids" open="(" separator="," close=")"
+					index="index" item="item">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+	
+</mapper>

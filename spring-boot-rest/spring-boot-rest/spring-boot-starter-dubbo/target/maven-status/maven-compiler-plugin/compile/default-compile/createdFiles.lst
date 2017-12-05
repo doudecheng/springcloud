@@ -1,0 +1,4 @@
+com\xqt\springboot\dubbo\autoconfigure\DubboAutoConfiguration.class
+com\xqt\springboot\dubbo\commands\ShutdownLatchMBean.class
+com\xqt\springboot\dubbo\commands\ShutdownLatch.class
+com\xqt\springboot\dubbo\commands\DubboServiceLatchCommandLineRunner.class

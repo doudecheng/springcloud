@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: sdo-common-lang:sdo-common-lang:1.0.20110929">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/sdo-common-lang/sdo-common-lang/1.0.20110929/sdo-common-lang-1.0.20110929.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/sdo-common-lang/sdo-common-lang/1.0.20110929/sdo-common-lang-1.0.20110929-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/sdo-common-lang/sdo-common-lang/1.0.20110929/sdo-common-lang-1.0.20110929-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
